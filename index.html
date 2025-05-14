@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherVista</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="logo">
+                <h1>WeatherVista</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active" data-page="home">Home</a></li>
+                <li class="auth-required hidden"><a href="#" data-page="dashboard">Dashboard</a></li>
+                <li class="auth-required hidden"><a href="#" data-page="forecast">Forecast</a></li>
+                <li class="auth-required hidden"><a href="#" data-page="alerts">Alerts</a></li>
+                <li class="auth-required hidden"><a href="#" data-page="locations">Locations</a></li>
+                <li><a href="#" data-page="about">About</a></li>
+                <li><a href="#" data-page="features">Features</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button id="login-btn" class="btn">Login</button>
+                <button id="signup-btn" class="btn btn-primary">Sign Up</button>
+                <div class="user-profile hidden">
+                    <img src="assests/profile_icon.png" alt="Profile" class="profile-img">
+                    <div class="dropdown-content">
+                        <a href="#" data-page="profile">Profile</a>
+                        <a href="#" data-page="settings">Settings</a>
+                        <a href="#" id="logout-btn">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <!-- Home Page (Landing Page for Non-Authenticated Users) -->
+            <section id="home" class="page active">
+                <div id="landing-page">
+                    <div class="hero-landing">
+                        <div class="hero-content">
+                            <h1>Your Personal Weather Assistant</h1>
+                            <p>Get instant weather updates and forecasts tailored to your location. Stay prepared, rain or shine!</p>
+                            <div class="cta-buttons">
+                                <button id="get-started-btn" class="btn btn-primary">Get Started</button>
+                                <button id="learn-more-btn" class="btn btn-outline">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="features-section">
+                        <h2>Why Choose WeatherVista?</h2>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <h3>Location-Based Forecasts</h3>
+                                <p>Get accurate weather forecasts for any location worldwide with our advanced location tracking.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <h3>Real-Time Updates</h3>
+                                <p>Stay informed with real-time weather updates and notifications for changing conditions.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <h3>Personalized Alerts</h3>
+                                <p>Set up custom alerts for specific weather conditions that matter to you.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>Detailed Forecasts</h3>
+                                <p>Access hourly and 7-day forecasts with comprehensive weather data and visualizations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonials-section">
+                        <h2>What Our Users Say</h2>
+                        <div class="testimonials-container">
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    <p>"WeatherVista has been a game-changer for planning my outdoor activities. The alerts are timely and accurate!"</p>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-info">
+                                        <h4>Dameesha Rauf</h4>
+                                        <p>Hiking Enthusiast</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    <p>"As a professional photographer, I rely on accurate weather forecasts. WeatherVista has never let me down."</p>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-info">
+                                        <h4>Hashir Rafique</h4>
+                                        <p>Photographer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    <p>"The detailed hourly forecasts help me plan my day efficiently. Best weather app I've used!"</p>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-info">
+                                        <h4>Hamna Yousaf</h4>
+                                        <p>Business Owner</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cta-section">
+                        <h2>Ready to Experience Better Weather Forecasting?</h2>
+                        <p>Join thousands of satisfied users who rely on WeatherVista for their daily weather needs.</p>
+                        <button id="signup-cta-btn" class="btn btn-primary">Create Free Account</button>
+                    </div>
+                </div>
+
+                <!-- Weather Content -->
+                <div id="weather-content" class="hidden">
+                    <div class="hero">
+                        <div class="hero-content">
+                            <h1>Real-time Weather Updates</h1>
+                            <p>Get accurate weather forecasts for any location worldwide</p>
+                            <div class="search-container">
+                                <input type="text" id="search-location" placeholder="Search for a city...">
+                                <button id="search-btn" class="btn btn-primary">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="current-weather">
+                        <h2>Current Weather</h2>
+                        <div id="weather-display" class="weather-card">
+                            <div class="location-info">
+                                <h3>Islamabad, US</h3>
+                                <p class="date">Sunday, May 10, 2025</p>
+                            </div>
+                            <div class="weather-info">
+                                <div class="temperature">
+                                    <span class="temp">24°C</span>
+                                    <span class="feels-like">Feels like: 26°C</span>
+                                </div>
+                                <div class="weather-icon">
+                                    <i class="fas fa-cloud-sun fa-4x"></i>
+                                    <p>Partly Cloudy</p>
+                                </div>
+                            </div>
+                            <div class="weather-details">
+                                <div class="detail">
+                                    <i class="fas fa-wind"></i>
+                                    <span>Wind: 5 km/h</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-tint"></i>
+                                    <span>Humidity: 65%</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-compress-arrows-alt"></i>
+                                    <span>Pressure: 1015 hPa</span>
+                                </div>
+                                <div class="detail">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Visibility: 10 km</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hourly-forecast">
+                        <h2>Hourly Forecast</h2>
+                        <div class="forecast-container" id="hourly-forecast-container">
+                            <!-- Hourly forecast items will be added here dynamically -->
+                            <div class="forecast-item">
+                                <p class="time">Now</p>
+                                <i class="fas fa-cloud-sun"></i>
+                                <p class="temp">24°C</p>
+                            </div>
+                            <div class="forecast-item">
+                                <p class="time">1 PM</p>
+                                <i class="fas fa-cloud"></i>
+                                <p class="temp">25°C</p>
+                            </div>
+                            <div class="forecast-item">
+                                <p class="time">2 PM</p>
+                                <i class="fas fa-cloud-sun"></i>
+                                <p class="temp">26°C</p>
+                            </div>
+                            <div class="forecast-item">
+                                <p class="time">3 PM</p>
+                                <i class="fas fa-sun"></i>
+                                <p class="temp">27°C</p>
+                            </div>
+                            <div class="forecast-item">
+                                <p class="time">4 PM</p>
+                                <i class="fas fa-sun"></i>
+                                <p class="temp">26°C</p>
+                            </div>
+                            <div class="forecast-item">
+                                <p class="time">5 PM</p>
+                                <i class="fas fa-cloud-sun"></i>
+                                <p class="temp">25°C</p>
+                            </div>
+                            <div class="forecast-item">
+                                <p class="time">6 PM</p>
+                                <i class="fas fa-cloud"></i>
+                                <p class="temp">23°C</p>
+                            </div>
+                            <div class="forecast-item">
+                                <p class="time">7 PM</p>
+                                <i class="fas fa-cloud"></i>
+                                <p class="temp">22°C</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="weekly-forecast">
+                        <h2>7-Day Forecast</h2>
+                        <div class="forecast-container" id="weekly-forecast-container">
+                            <!-- Weekly forecast items will be added here dynamically -->
+                            <div class="forecast-item weekly">
+                                <p class="day">Mon</p>
+                                <i class="fas fa-cloud-sun"></i>
+                                <div class="temp-range">
+                                    <span class="max">27°C</span>
+                                    <span class="min">20°C</span>
+                                </div>
+                            </div>
+                            <div class="forecast-item weekly">
+                                <p class="day">Tue</p>
+                                <i class="fas fa-cloud"></i>
+                                <div class="temp-range">
+                                    <span class="max">25°C</span>
+                                    <span class="min">19°C</span>
+                                </div>
+                            </div>
+                            <div class="forecast-item weekly">
+                                <p class="day">Wed</p>
+                                <i class="fas fa-cloud-rain"></i>
+                                <div class="temp-range">
+                                    <span class="max">23°C</span>
+                                    <span class="min">18°C</span>
+                                </div>
+                            </div>
+                            <div class="forecast-item weekly">
+                                <p class="day">Thu</p>
+                                <i class="fas fa-cloud-showers-heavy"></i>
+                                <div class="temp-range">
+                                    <span class="max">22°C</span>
+                                    <span class="min">17°C</span>
+                                </div>
+                            </div>
+                            <div class="forecast-item weekly">
+                                <p class="day">Fri</p>
+                                <i class="fas fa-cloud-sun"></i>
+                                <div class="temp-range">
+                                    <span class="max">24°C</span>
+                                    <span class="min">18°C</span>
+                                </div>
+                            </div>
+                            <div class="forecast-item weekly">
+                                <p class="day">Sat</p>
+                                <i class="fas fa-sun"></i>
+                                <div class="temp-range">
+                                    <span class="max">26°C</span>
+                                    <span class="min">20°C</span>
+                                </div>
+                            </div>
+                            <div class="forecast-item weekly">
+                                <p class="day">Sun</p>
+                                <i class="fas fa-sun"></i>
+                                <div class="temp-range">
+                                    <span class="max">28°C</span>
+                                    <span class="min">21°C</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Page -->
+            <section id="about" class="page">
+                <h1>About WeatherVista</h1>
+                <div class="about-container">
+                    <div class="about-content">
+                        <h2>Our Mission</h2>
+                        <p>At WeatherVista, our mission is to provide accurate, timely, and user-friendly weather information to help people make informed decisions about their day-to-day activities.</p>
+                        
+                        <h2>Our Story</h2>
+                        <p>WeatherVista founded in 2022 by a team of meteorologists and software developers who were passionate about making weather data more accessible and useful for everyone. We noticed that existing weather services were either too complex for everyday users or too simplified to be truly helpful.</p>
+                        <p>We set out to create a platform that strikes the perfect balance - providing detailed, accurate weather information in a format that's easy to understand and use.</p>
+                        
+                        <h2>Our Technology</h2>
+                        <p>We use advanced weather prediction models and data from multiple reliable sources to ensure our forecasts are as accurate as possible. Our platform is constantly evolving, with regular updates to improve accuracy and add new features based on user feedback.</p>
+                        
+                        <h2>Our Team</h2>
+                        <div class="team-grid">
+                            <div class="team-member">
+                                <h3>Rifat Ijaz</h3>
+                                <p>Chief Meteorologist</p>
+                            </div>
+                            <div class="team-member">
+                                <h3>Saad Hassan</h3>
+                                <p>Lead Developer</p>
+                            </div>
+                            <div class="team-member">
+                                <h3>Miraal Fatima</h3>
+                                <p>UX Designer</p>
+                            </div>
+                            <div class="team-member">
+                                <h3>Laraib</h3>
+                                <p>Data Scientist</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Page -->
+            <section id="features" class="page">
+                <h1>Features</h1>
+                <div class="features-container">
+                    <div class="feature-block">
+                        <div class="feature-icon large">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="feature-details">
+                            <h2>Location-Based Weather</h2>
+                            <p>Get accurate weather forecasts for any location worldwide. Save your favorite locations for quick access and receive customized forecasts based on your current location.</p>
+                            <ul class="feature-list">
+                                <li>Current location detection</li>
+                                <li>Save multiple locations</li>
+                                <li>Quick switching between saved locations</li>
+                                <li>Global coverage</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-block">
+                        <div class="feature-icon large">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="feature-details">
+                            <h2>Detailed Forecasts</h2>
+                            <p>Access comprehensive weather data including current conditions, hourly forecasts, and 7-day predictions. Our detailed forecasts provide all the information you need to plan your activities.</p>
+                            <ul class="feature-list">
+                                <li>Current weather conditions</li>
+                                <li>Hourly forecasts for the next 24 hours</li>
+                                <li>7-day forecast with high/low temperatures</li>
+                                <li>Precipitation, humidity, wind, and pressure data</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-block">
+                        <div class="feature-icon large">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="feature-details">
+                            <h2>Personalized Alerts</h2>
+                            <p>Set up custom alerts for specific weather conditions that matter to you. Receive timely notifications about severe weather, temperature changes, or any other conditions you specify.</p>
+                            <ul class="feature-list">
+                                <li>Severe weather warnings</li>
+                                <li>Custom temperature alerts</li>
+                                <li>Precipitation notifications</li>
+                                <li>Wind speed alerts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-block">
+                        <div class="feature-icon large">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div class="feature-details">
+                            <h2>Customizable Dashboard</h2>
+                            <p>Personalize your weather dashboard to show the information that matters most to you. Arrange widgets, choose display units, and customize your weather viewing experience.</p>
+                            <ul class="feature-list">
+                                <li>Customizable layout</li>
+                                <li>Choice of metric or imperial units</li>
+                                <li>Dark and light mode</li>
+                                <li>Widget arrangement</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Page (Auth Required) -->
+            <section id="dashboard" class="page auth-required-page">
+                <h1>Your Weather Dashboard</h1>
+                <div class="dashboard-container">
+                    <div class="dashboard-sidebar">
+                        <div class="user-info">
+                            <img src="https://via.placeholder.com/80" alt="Profile" class="profile-img-large">
+                            <h3>Welcome, <span id="user-name">User</span></h3>
+                        </div>
+                        <ul class="dashboard-menu">
+                            <li class="active"><a href="#overview">Overview</a></li>
+                            <li><a href="#saved-locations">Saved Locations</a></li>
+                            <li><a href="#alerts">Weather Alerts</a></li>
+                            <li><a href="#settings">Settings</a></li>
+                        </ul>
+                    </div>
+                    <div class="dashboard-content">
+                        <div id="overview" class="dashboard-section active">
+                            <h2>Overview</h2>
+                            <div class="dashboard-cards">
+                                <div class="dashboard-card">
+                                    <h3>Current Location</h3>
+                                    <div class="location-weather">
+                                        <div class="location-info">
+                                            <h4>New York, US</h4>
+                                            <p>Monday, June 10, 2024</p>
+                                        </div>
+                                        <div class="weather-summary">
+                                            <div class="temperature">
+                                                <span class="temp">24°C</span>
+                                            </div>
+                                            <div class="weather-icon">
+                                                <i class="fas fa-cloud-sun fa-2x"></i>
+                                                <p>Partly Cloudy</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dashboard-card">
+                                    <h3>Active Alerts</h3>
+                                    <div class="alert-list">
+                                        <div class="alert-item">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            <div class="alert-info">
+                                                <h4>Heavy Rain Warning</h4>
+                                                <p>New York - Tomorrow</p>
+                                            </div>
+                                        </div>
+                                        <a href="#" class="view-all">View All Alerts</a>
+                                    </div>
+                                </div>
+                                <div class="dashboard-card">
+                                    <h3>Saved Locations</h3>
+                                    <div class="saved-locations-list">
+                                        <div class="location-item">
+                                            <div class="location-name">New York</div>
+                                            <div class="location-temp">24°C</div>
+                                            <i class="fas fa-cloud-sun"></i>
+                                        </div>
+                                        <div class="location-item">
+                                            <div class="location-name">London</div>
+                                            <div class="location-temp">18°C</div>
+                                            <i class="fas fa-cloud-rain"></i>
+                                        </div>
+                                        <div class="location-item">
+                                            <div class="location-name">Tokyo</div>
+                                            <div class="location-temp">28°C</div>
+                                            <i class="fas fa-sun"></i>
+                                        </div>
+                                        <a href="#" class="view-all">Manage Locations</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other pages remain the same -->
+            <!-- ... -->
+        </main>
+
+        <!-- Auth Modals -->
+        <div id="login-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Login to Your Account</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <div class="form-actions">
+                        <a href="#" id="forgot-password-link">Forgot Password?</a>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+       
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/config.js"></script>
+   <!-- <script src="js/dashboard.js"></script>
+    <script src="js/debug.js"></script>-->
+</body>
+</html>
